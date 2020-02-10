@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Carrinho1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8a5c6468-cbfb-40c5-844e-c518e619b1a9">
+	<property name="ireport.zoom" value="5.178406821589654"/>
+	<property name="ireport.x" value="1902"/>
+	<property name="ireport.y" value="104"/>
+	<parameter name="PARAMETRO_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PARAMETRO_DESCONTO" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT p.codigo, p.montadora, p.tipopeca, p.aplicacao, p.preco, c.qtd, c.id_usuario
+    FROM produto AS p
+    JOIN tb_carrinho AS c
+    ON c.id_produto = p.codigo
+    WHERE c.id_usuario = $P{PARAMETRO_ID}
+    ORDER BY p.codigo;]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="montadora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipopeca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aplicacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="preco" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qtd" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_usuario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="SUM_TOTAL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$P{PARAMETRO_DESCONTO}.equals(0)? $F{preco} * 1 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(1)? $F{preco} * 0.6 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(2)? $F{preco} * 0.57 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(3)? $F{preco} * 0.54 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(4)? $F{preco} * 0.5 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(5)? $F{preco} * 0.475 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(6)? $F{preco} * 0.45 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(7)? $F{preco} * 0.4275 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(8)? $F{preco} * 0.405 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(9)? $F{preco} * 0.3847 * $F{qtd} : "ERRO"]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="SUM_UNIT" class="java.lang.Double" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$P{PARAMETRO_DESCONTO}.equals(0)? $F{preco} * 1 :
+$P{PARAMETRO_DESCONTO}.equals(1)? $F{preco} * 0.6 :
+$P{PARAMETRO_DESCONTO}.equals(2)? $F{preco} * 0.57 :
+$P{PARAMETRO_DESCONTO}.equals(3)? $F{preco} * 0.54 :
+$P{PARAMETRO_DESCONTO}.equals(4)? $F{preco} * 0.5 :
+$P{PARAMETRO_DESCONTO}.equals(5)? $F{preco} * 0.475 :
+$P{PARAMETRO_DESCONTO}.equals(6)? $F{preco} * 0.45 :
+$P{PARAMETRO_DESCONTO}.equals(7)? $F{preco} * 0.4275 :
+$P{PARAMETRO_DESCONTO}.equals(8)? $F{preco} * 0.405 :
+$P{PARAMETRO_DESCONTO}.equals(9)? $F{preco} * 0.3847 : "ERRO"]]></variableExpression>
+	</variable>
+	<variable name="TOT_DESCONTO" class="java.lang.String">
+		<variableExpression><![CDATA[$P{PARAMETRO_DESCONTO}.equals(0)? $F{preco} * 1 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(1)? $F{preco} * 0.6 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(2)? $F{preco} * 0.57 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(3)? $F{preco} * 0.54 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(4)? $F{preco} * 0.5 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(5)? $F{preco} * 0.475 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(6)? $F{preco} * 0.45 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(7)? $F{preco} * 0.4275 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(8)? $F{preco} * 0.405 * $F{qtd} :
+$P{PARAMETRO_DESCONTO}.equals(9)? $F{preco} * 0.3847 * $F{qtd} : "ERRO"]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="52" uuid="2ea77c1c-05d9-4d81-a09b-ccfdb022969c"/>
+				<imageExpression><![CDATA["C:\\UNIUN\\Cupom Fiscal - UNIUN\\Cupom Fiscal - UNIUN\\header2.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="451" y="12" width="100" height="20" forecolor="#FFFFFF" uuid="43785034-b552-470c-9894-b7cd9364c2a3"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="28" y="0" width="56" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="9539cf41-25c1-47f1-9db7-44585e009563"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="89" y="0" width="78" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="2b0d6a51-66e8-44d7-96d7-83d7be626c69"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[MONTADORA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="172" y="0" width="109" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="0be00d09-f7dc-4074-9767-21cf3fea7fac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[TIPO DA PEÇA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="288" y="0" width="169" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="f1391d54-d92f-460e-bcee-6444f5df2447"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[APLICAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="463" y="0" width="39" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="a065026a-3aa7-4bd9-ba88-759427f8317a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[V. UNIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="25" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="750cce8b-3f73-4f85-896a-8022ccc1a956"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[QTD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="508" y="0" width="47" height="20" forecolor="#FFFFFF" backcolor="#203864" uuid="9c4098d3-b59b-4be6-9723-550e1053970f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[V. TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="0" width="62" height="18" forecolor="#203864" uuid="aaee244e-ad43-492b-a667-28844ea57fcc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="0" width="83" height="18" forecolor="#203864" uuid="3aa08d81-4499-4423-adb5-705f3f970a0a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montadora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="0" width="117" height="18" forecolor="#203864" uuid="f752e23d-e9a4-48b8-9e4b-9eb65e06aab5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipopeca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="0" width="177" height="18" forecolor="#203864" uuid="6823c925-805a-4339-9885-685af5082abb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aplicacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="26" height="18" forecolor="#203864" uuid="a875a0de-b2c5-438f-9b3e-b89dfa4ac156"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="0" width="47" height="18" forecolor="#203864" uuid="ba60c4a1-0a4b-4e56-ab4d-2608eb88f7a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_UNIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="0" width="47" height="18" forecolor="#203864" uuid="da0bafcd-99c5-4624-b7f9-889a21d0d813"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOT_DESCONTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="54" uuid="a71ee081-7ea6-44b3-afaf-2a809c0cae15"/>
+				<imageExpression><![CDATA["C:\\UNIUN\\Cupom Fiscal - UNIUN\\Cupom Fiscal - UNIUN\\footer2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="418" y="0" width="21" height="24" forecolor="#FFFFFF" uuid="a982cf3a-6d33-47d5-af01-4711bc2333fa"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="34" width="99" height="20" forecolor="#203864" uuid="f8ef4bee-ecc1-4785-9928-0e2d77ab8ff8"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="25" height="20" forecolor="#203864" uuid="d1543ede-ad42-4a68-858c-7c85057f1d6f"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PÁG.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="439" y="0" width="116" height="24" forecolor="#FFFFFF" uuid="0d19d578-7b28-4708-8fb1-5ab9da11a8b6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
